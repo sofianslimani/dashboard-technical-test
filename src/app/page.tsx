@@ -1,101 +1,137 @@
+"use client";
+
+import React, { useMemo } from "react";
 import Image from "next/image";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ChevronRightIcon } from "@heroicons/react/24/solid";
+import { Badge } from "@/components/ui/badge";
+import ProjectsSlider from "@/components/ProjectsSlider";
+
+const projects = [
+  {
+    type: "Recrutement",
+    title: "POP - SDR Levallois",
+    launchDate: "Lancée le 12/01/23",
+    stats: [
+      { title: "Nombre de candidatures", value: 537, sourcing: 51, hunt: 1 },
+      { title: "Candidats évalués", value: 14, sourcing: 51, hunt: 1 },
+      { title: "Dossiers présentés", value: 537, sourcing: 51, hunt: 1 },
+    ],
+  },
+];
+
+const WelcomeCard = () => (
+  <Card className="flex-shrink-0">
+    <CardHeader>
+      <CardTitle className="opacity-50 font-light text-3xl">Hello !</CardTitle>
+      <h2 className="text-3xl font-bold">Esther Howard</h2>
+      <Badge variant="default" className="text-xs">
+        esther-howard@gmail.com
+      </Badge>
+    </CardHeader>
+  </Card>
+);
+
+const ToolCard = ({
+  title,
+  badge,
+  description,
+}: {
+  title: string;
+  badge: string;
+  description: string;
+}) => (
+  <Card className="flex flex-col gap-1 lg:gap-2 xl:gap-4 xl:p-8">
+    <CardHeader>
+      <Badge variant="secondary">{badge}</Badge>
+    </CardHeader>
+    <CardContent className="flex flex-col gap-2">
+      <p className="text-xl xl:text-2xl font-semibold">{title}</p>
+      <p className="text-sm max-w-sm">{description}</p>
+    </CardContent>
+    <CardFooter>
+      <Button className="w-full">Évaluer mes commerciaux</Button>
+    </CardFooter>
+  </Card>
+);
+
+const StudyCard = ({ index }: { index: number }) => (
+  <div className="aspect-auto overflow-hidden rounded-xl h-full">
+    <Image
+      src={`/images/etudes/etude-${index}.jpg`}
+      alt={`etude-${index}`}
+      width={152}
+      height={152}
+      className="w-full h-full object-cover"
+    />
+  </div>
+);
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const toolsData = useMemo(
+    () => [
+      {
+        title: "Scan",
+        badge: "Gratuit",
+        description:
+          "Quelles sont les forces et faiblesses de votre exécution commerciale ?",
+      },
+      {
+        title: "Assessment",
+        badge: "5 évaluations gratuites",
+        description:
+          "Quel est le niveau de vos commerciaux et leurs axes de progression ?",
+      },
+    ],
+    []
+  );
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-6 gap-7 h-full pt-14 pb-14 sm:pt-0 sm:pb-0">
+      <div className="flex flex-col lg:col-span-3 xl:col-span-2 gap-7 h-full">
+        <WelcomeCard />
+        <div className="flex-grow h-full">
+          <ProjectsSlider projects={projects} />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      <div className="flex flex-col lg:col-span-3 xl:col-span-4 gap-7 sm:gap-2">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl">
+              Découvrez vos outils pour gagner des points de croissance
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {toolsData.map((tool, index) => (
+                <ToolCard key={index} {...tool} />
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="rounded-none overflow-auto bg-transparent p-0 lg:p-0 2xl:p-0 h-full justify-end lg:gap-4 2xl:gap-8">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle className="text-xl">Études</CardTitle>
+            <Button variant="link" className="text-sm" size="link">
+              Tout voir <ChevronRightIcon className="h-4 w-4 ml-1" />
+            </Button>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 2xl:gap-8">
+              {[1, 2, 3, 4].map((i) => (
+                <StudyCard key={i} index={i} />
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
