@@ -63,7 +63,7 @@ const ToolCard = ({
 );
 
 const StudyCard = ({ index }: { index: number }) => (
-  <div className="aspect-auto overflow-hidden rounded-xl h-full">
+  <div className="aspect-auto overflow-hidden rounded-xl h-full ">
     <Image
       src={`/images/etudes/etude-${index}.jpg`}
       alt={`etude-${index}`}
@@ -124,7 +124,7 @@ export default function Home() {
             </Button>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 2xl:gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 2xl:gap-8 w-full">
               {[1, 2, 3, 4].map((i) => (
                 <StudyCard key={i} index={i} />
               ))}

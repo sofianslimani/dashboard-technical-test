@@ -24,7 +24,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   }, []);
 
   return (
-    <div className=" relative flex h-full sm:h-[calc(100vh-0.75rem)]">
+    <div className="relative flex h-full sm:h-[calc(100vh-0.75rem)]">
       <ClientSidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
       {isSidebarOpen && (
         <div
@@ -34,7 +34,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       )}
       <div className="flex-1 lex-grow h-full bg-gray-100 sm:rounded-tl-3xl overflow-hidden z-30 ">
         <MobileHeader onMenuClick={toggleSidebar} />
-        <main className="  h-full p-4 lg:p-8 overflow-auto">{children}</main>
+        <main className="h-full p-4 lg:p-8 overflow-auto">{children}</main>
       </div>
     </div>
   );
